@@ -20,6 +20,10 @@ public class TreeLifecycle : MonoBehaviour
     private Color initialColor;
     public float sinkAmount = 0.5f; //Einsinktiefe
     public Vector3 fallDirection = Vector3.forward; // Fallrichtung
+    private bool dyingStarted = false; // damit coroutine nur einmal ausgefuehrt wird
+    public bool birdChoseThisTree; // falls zwei Baeume gleich gross sind
+
+    BirdPathF birdPath;
 
     void Start(){
         transform.localScale = new Vector3(startSize, startSize, startSize);
@@ -27,6 +31,11 @@ public class TreeLifecycle : MonoBehaviour
         if (treeSpawner == null)
         {
             treeSpawner = FindObjectOfType<TreeSpawner>(); // Sucht beliebigen Spawner in der Szene
+        }
+
+        if (birdPath == null)
+        {
+            birdPath = FindObjectOfType<BirdPathF>();
         }
 
         treeRenderer = GetComponent<Renderer>();
@@ -54,9 +63,10 @@ public class TreeLifecycle : MonoBehaviour
         currentLifetime += Time.deltaTime;
 
         // Baum verschwindet nach Ablauf der Lebenszeit
-        if (currentLifetime >= lifetime)
+        if (currentLifetime >= lifetime && !dyingStarted)
         {
-            StartCoroutine(Die());;
+            StartCoroutine(Die());
+            dyingStarted = true;
             treeSpawner.baumEliminieren(this.gameObject);
         }
     }
@@ -69,7 +79,6 @@ public class TreeLifecycle : MonoBehaviour
 
         while(timer < fallDuration){
             timer = timer + Time.deltaTime;
-            
             float t = timer / fallDuration;
 
             //fallen und halb im Boden versinken
@@ -85,6 +94,13 @@ public class TreeLifecycle : MonoBehaviour
         }
         transform.rotation = endRot;
         transform.position = endPos;
+
+        // Vogel muss neuen Baum suchen
+        if(birdChoseThisTree)
+        {
+            birdPath.birdHasTree = false;
+        }
+
         Destroy(gameObject);
     }    
 }

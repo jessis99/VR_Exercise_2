@@ -6,12 +6,21 @@ public class TreeSpawner : MonoBehaviour
 {
     public GameObject treePrefab;
     private float spawnInterval = 5f;
-    private float spawnArea = 20f;
+    [SerializeField] float minSpawnInterval = 4f;
+    [SerializeField] float maxSpawnInterval = 6f;
+    private float spawnArea = 50f;
     public float minDistance = 3f;
 
     private float timer = 0f;
 
     private List<GameObject> trees = new List<GameObject>();
+
+    [SerializeField] GameObject firstTree;
+
+    void Start()
+    {
+        trees.Add(firstTree);
+    }
 
     void Update()
     {
@@ -21,6 +30,7 @@ public class TreeSpawner : MonoBehaviour
         {
             SpawnTree();
             timer = 0f;
+            spawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
         }
     }
 
@@ -53,5 +63,11 @@ public class TreeSpawner : MonoBehaviour
         {
             trees.Remove(tree);
         }
+    }
+
+    public Vector3 BiggestTreePosition()
+    {
+        trees[0].GetComponent<TreeLifecycle>().birdChoseThisTree = true;
+        return trees[0].transform.position;
     }
 }
