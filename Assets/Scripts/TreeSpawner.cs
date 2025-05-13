@@ -49,7 +49,7 @@ public class TreeSpawner : MonoBehaviour
         
     }
 
-    bool ensureMinDistance(Vector3 randomPosition){             //liefert aktuell immer false, da irgendwann das Feld voll ist und die Baeume sich nciht ueberlagern duerfen
+    bool ensureMinDistance(Vector3 randomPosition){            
         foreach(GameObject tree in trees){
             if(Vector3.Distance(tree.transform.position, randomPosition) < minDistance){
                 return false;

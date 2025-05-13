@@ -62,6 +62,22 @@ public class TreeLifecycle : MonoBehaviour
 
         currentLifetime += Time.deltaTime;
 
+        float timeLeft = lifetime - currentLifetime;
+
+
+        // The trees start pulsating and blinking red in the last 5 seconds of their life
+        if (timeLeft <= 5f && !dyingStarted)
+        {
+            // Blinking red
+            float blink = Mathf.PingPong(Time.time * 5f, 1f); // faster blinking
+            Color blinkColor = Color.Lerp(initialColor, Color.red, blink);
+            treeRenderer.material.color = blinkColor;
+
+            // Pulsating
+            float pulse = 1f + Mathf.Sin(Time.time * 10f) * 0.05f; // 5% pulse
+            transform.localScale = new Vector3(pulse, pulse, pulse) * Mathf.Min(maxSize, transform.localScale.x + 0.001f);
+        }
+
         // Baum verschwindet nach Ablauf der Lebenszeit
         if (currentLifetime >= lifetime && !dyingStarted)
         {
