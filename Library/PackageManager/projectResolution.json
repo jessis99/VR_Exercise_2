@@ -1,21 +1,31 @@
 {
   "context": {
-    "projectPath": "C:/Users/leori/Desktop/Master/Unity/Uebung2/VR_Exercise_2/Packages",
+    "projectPath": "C:/Users/tried/OneDrive/Documents/GitHub/VR_Exercise_2/Packages",
     "unityVersion": "6000.0.47f1"
   },
   "inputs": [
-    "C:\\Users\\leori\\Desktop\\Master\\Unity\\Uebung2\\VR_Exercise_2\\Packages\\manifest.json",
-    "C:\\Users\\leori\\Desktop\\Master\\Unity\\Uebung2\\VR_Exercise_2\\Packages\\packages-lock.json",
+    "C:\\Users\\tried\\OneDrive\\Documents\\GitHub\\VR_Exercise_2\\Packages\\manifest.json",
+    "C:\\Users\\tried\\OneDrive\\Documents\\GitHub\\VR_Exercise_2\\Packages\\packages-lock.json",
     "C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.47f1\\Editor\\Data\\Resources\\PackageManager\\BuiltInPackages\\BuiltInPackagesCombined.sha1"
   ],
   "outputs": {
     "com.unity.multiplayer.center@1.0.0": {
       "name": "com.unity.multiplayer.center",
       "displayName": "Multiplayer Center",
-      "resolvedPath": "C:\\Users\\leori\\Desktop\\Master\\Unity\\Uebung2\\VR_Exercise_2\\Library\\PackageCache\\com.unity.multiplayer.center@f3fb577b3546",
+      "resolvedPath": "C:\\Users\\tried\\OneDrive\\Documents\\GitHub\\VR_Exercise_2\\Library\\PackageCache\\com.unity.multiplayer.center@f3fb577b3546",
       "fingerprint": "f3fb577b3546594b97b8cc34307cd621f60f1c73",
       "editorCompatibility": "6000.0.0a1",
       "version": "1.0.0",
+      "source": "builtin",
+      "testable": false
+    },
+    "com.unity.ugui@2.0.0": {
+      "name": "com.unity.ugui",
+      "displayName": "Unity UI",
+      "resolvedPath": "C:\\Users\\tried\\OneDrive\\Documents\\GitHub\\VR_Exercise_2\\Library\\PackageCache\\com.unity.ugui@f3fac7af1578",
+      "fingerprint": "f3fac7af157843ea3b769ef7c6aa56de52618aeb",
+      "editorCompatibility": "2019.2.0a1",
+      "version": "2.0.0",
       "source": "builtin",
       "testable": false
     },
