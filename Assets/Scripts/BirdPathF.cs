@@ -11,7 +11,8 @@ public class BirdPathF : MonoBehaviour
 
     [SerializeField] float birdSpeed = 2f;
 
-    Vector3 biggestTreePosition;
+    Vector3 targetTreePosition;
+    GameObject targetTree;
 
     TreeSpawner treeSpawner;
 
@@ -36,25 +37,23 @@ public class BirdPathF : MonoBehaviour
             }
             else
             {
-                // zu groesstem Baum hinfliegen
+                // zu Baum hinfliegen
                 MoveBirdToTree();
             }
         }
         else
         {
-            biggestTreePosition = treeSpawner.BiggestTreePosition();
-            biggestTreePosition.y = 3;
-            birdHasTree = true;
-            closeToTree = false;
+            // Default behavior when no tree is selected - find biggest tree
+            FindBiggestTree();
         }
     }
 
     void MoveBirdToTree()
     {
-        if(Vector3.Distance(transform.position, biggestTreePosition) >= 5)
+        if(Vector3.Distance(transform.position, targetTreePosition) >= 5)
         {
-            transform.position = Vector3.MoveTowards(transform.position, biggestTreePosition, birdSpeed*Time.deltaTime);
-            transform.LookAt(biggestTreePosition);
+            transform.position = Vector3.MoveTowards(transform.position, targetTreePosition, birdSpeed*Time.deltaTime);
+            transform.LookAt(targetTreePosition);
         }
         else
         {
@@ -65,7 +64,45 @@ public class BirdPathF : MonoBehaviour
     void RotateBird()
     {
         // Rotiert das Objekt um den Baum (y-Achse) 
-        transform.RotateAround(biggestTreePosition, rotationAxis, rotationSpeed * Time.deltaTime);
-        transform.LookAt(biggestTreePosition);
+        transform.RotateAround(targetTreePosition, rotationAxis, rotationSpeed * Time.deltaTime);
+        transform.LookAt(targetTreePosition);
+    }
+    
+    // New method to set the target tree from the pointer
+    public void SetTargetTree(GameObject tree)
+    {
+        if (tree != null)
+        {
+            targetTree = tree;
+            targetTreePosition = tree.transform.position;
+            targetTreePosition.y = 3; // Adjust height for bird flight
+            
+            // Mark the tree as chosen by the bird
+            TreeLifecycle treeLifecycle = tree.GetComponent<TreeLifecycle>();
+            if (treeLifecycle != null)
+            {
+                treeLifecycle.birdChoseThisTree = true;
+            }
+            
+            birdHasTree = true;
+            closeToTree = false;
+        }
+    }
+    
+    // Find the biggest tree when no tree is selected
+    private void FindBiggestTree()
+    {
+        targetTreePosition = treeSpawner.BiggestTreePosition();
+        targetTreePosition.y = 3;
+        birdHasTree = true;
+        closeToTree = false;
+    }
+    
+    // Called when the current tree is destroyed
+    public void OnTreeDestroyed()
+    {
+        birdHasTree = false;
+        closeToTree = false;
+        targetTree = null;
     }
 }

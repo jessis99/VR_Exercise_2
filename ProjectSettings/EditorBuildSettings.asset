@@ -11,5 +11,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AufgabenteilH.unity
     guid: 57b23b5804bec3e49a707606a574da12
-  m_configObjects: {}
+  m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 735390d7a648cf747aef60a5f466b5d3, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: ac0e5c8e98244d141aed542140c146d3, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: c1b20027417b7ee4daf8225290ec75e5, type: 2}
   m_UseUCBPForAssetBundles: 0
