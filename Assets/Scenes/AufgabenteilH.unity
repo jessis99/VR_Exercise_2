@@ -178,7 +178,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6788538757290762323, guid: ad4137f595ec8e2449cacca9df7d3735, type: 3}
   m_PrefabInstance: {fileID: 1463470086}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &138948085
+--- !u!114 &138948090
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -187,12 +187,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 138948080}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7693179cc9cffa4c9a37bdb4c209a85, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b685f2b083c8d3949f6e8cb14fb541a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  birdHasTree: 0
-  rotationSpeed: 41
-  birdSpeed: 4
+  birdSpeed: 2
 --- !u!1 &206774931
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,7 +227,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   pointerLine: {fileID: 206774934}
-  birdPath: {fileID: 138948085}
+  birdPath: {fileID: 0}
 --- !u!4 &206774933
 Transform:
   m_ObjectHideFlags: 0
@@ -1015,7 +1013,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6788538757290762323, guid: ad4137f595ec8e2449cacca9df7d3735, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 138948085}
+      addedObject: {fileID: 138948090}
   m_SourcePrefab: {fileID: 100100000, guid: ad4137f595ec8e2449cacca9df7d3735, type: 3}
 --- !u!1001 &1587721324
 PrefabInstance:
@@ -1031,15 +1029,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.4
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.82
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -15.25
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_LocalRotation.w

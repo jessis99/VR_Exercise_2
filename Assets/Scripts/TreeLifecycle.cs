@@ -97,6 +97,15 @@ public class TreeLifecycle : MonoBehaviour
         }
     }
 
+    public void treeSelected(){
+        Color selectColor = Color.Lerp(initialColor, Color.blue, 1);
+        treeRenderer.material.color = selectColor;
+    }
+
+    public void treeUnselected(){
+        treeRenderer.material.color = initialColor;
+    }
+
     private IEnumerator Die(){
         Quaternion startRot = transform.rotation;
         Quaternion endRot = Quaternion.Euler(fallDirection * 90f) * startRot;

@@ -68,27 +68,6 @@ public class BirdPathF : MonoBehaviour
         transform.LookAt(targetTreePosition);
     }
     
-    // New method to set the target tree from the pointer
-    public void SetTargetTree(GameObject tree)
-    {
-        if (tree != null)
-        {
-            targetTree = tree;
-            targetTreePosition = tree.transform.position;
-            targetTreePosition.y = 3; // Adjust height for bird flight
-            
-            // Mark the tree as chosen by the bird
-            TreeLifecycle treeLifecycle = tree.GetComponent<TreeLifecycle>();
-            if (treeLifecycle != null)
-            {
-                treeLifecycle.birdChoseThisTree = true;
-            }
-            
-            birdHasTree = true;
-            closeToTree = false;
-        }
-    }
-    
     // Find the biggest tree when no tree is selected
     private void FindBiggestTree()
     {
