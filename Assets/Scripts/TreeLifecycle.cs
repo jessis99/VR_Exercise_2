@@ -22,6 +22,8 @@ public class TreeLifecycle : MonoBehaviour
     public Vector3 fallDirection = Vector3.forward; // Fallrichtung
     private bool dyingStarted = false; // damit coroutine nur einmal ausgefuehrt wird
     public bool birdChoseThisTree; // falls zwei Baeume gleich gross sind
+    private bool reachedByBird = false;
+    public GameObject bird;
 
     BirdPathF birdPath;
 
@@ -31,6 +33,11 @@ public class TreeLifecycle : MonoBehaviour
         if (treeSpawner == null)
         {
             treeSpawner = FindObjectOfType<TreeSpawner>(); // Sucht beliebigen Spawner in der Szene
+        }
+
+        if (bird == null)
+        {
+            bird = GameObject.Find("Sparrow"); // Sucht Vogel
         }
 
         if (birdPath == null)
@@ -64,6 +71,9 @@ public class TreeLifecycle : MonoBehaviour
 
         float timeLeft = lifetime - currentLifetime;
 
+        if(Vector3.Distance(bird.transform.position, transform.position) < 6){
+            reachedByBird = true;
+        }
 
         // The trees start pulsating and blinking red in the last 5 seconds of their life
         if (timeLeft <= 5f && !dyingStarted)
@@ -118,5 +128,11 @@ public class TreeLifecycle : MonoBehaviour
         }
 
         Destroy(gameObject);
-    }    
+
+        if(reachedByBird){
+            Points.increaseScore();
+        }else{
+            Points.decreaseScore();
+        }
+    }  
 }

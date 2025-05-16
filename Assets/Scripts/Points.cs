@@ -1,18 +1,36 @@
 using UnityEngine;
+using System;
+using TMPro;
 
 public class Points : MonoBehaviour
 {
-    private int score;
+    private static int score = 0;
+    public TMP_Text scoreText;
+    private static bool timeIsOver = false;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        score = 0;
+    public static void increaseScore(){
+        if(!timeIsOver){
+            score = score + 1;
+            Console.WriteLine(score);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public static void decreaseScore(){
+        if(!timeIsOver){
+            score = score - 1;
+            Console.WriteLine(score);
+        }
+    }
+
+    public static int getScore(){
+        return score;
+    }
+
+    public static void setTimeIsOver(bool over){
+        timeIsOver = over;
+    }
+
+    void Update(){
+        scoreText.text = "Score: " + score;
     }
 }

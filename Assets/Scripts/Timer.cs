@@ -14,8 +14,6 @@ public class Timer : MonoBehaviour
     float timeElapsed = 0f;
     [SerializeField] float timeTotal = 120f;
 
-    int score = 20;
-
     void Update()
     {
         if(timeElapsed < timeTotal)
@@ -25,8 +23,9 @@ public class Timer : MonoBehaviour
         }
         else
         {
+            Points.setTimeIsOver(true);
             timerCanvas.SetActive(false);
-            scoreText.text = "Score: " + score;
+            scoreText.text = "Score: " + Points.getScore();
             scoreCanvas.SetActive(true);
         }
     }

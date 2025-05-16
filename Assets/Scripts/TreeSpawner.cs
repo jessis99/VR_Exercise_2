@@ -10,7 +10,6 @@ public class TreeSpawner : MonoBehaviour
     [SerializeField] float maxSpawnInterval = 6f;
     private float spawnArea = 50f;
     public float minDistance = 3f;
-
     private float timer = 0f;
 
     private List<GameObject> trees = new List<GameObject>();
