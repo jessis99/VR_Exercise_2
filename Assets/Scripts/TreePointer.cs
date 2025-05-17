@@ -78,7 +78,7 @@ public class TreePointer : MonoBehaviour
         // Get controller position and forward direction
         Vector3 rayOrigin = transform.position;
         Vector3 rayDirection = transform.forward;
-        
+
         // Draw line for visual feedback
         if (pointerLine != null)
         {
@@ -86,42 +86,68 @@ public class TreePointer : MonoBehaviour
             pointerLine.SetPosition(0, rayOrigin);
             pointerLine.SetPosition(1, rayOrigin + rayDirection * maxPointDistance);
         }
-        
-        TreeLifecycle treeLifecycle;
 
         // Perform raycast to detect trees
         RaycastHit hit;
         if (Physics.Raycast(rayOrigin, rayDirection, out hit, maxPointDistance, treeLayer))
         {
-            // Check if hit object has TreeLifecycle component
-            treeLifecycle = hit.collider.GetComponent<TreeLifecycle>();
-            if (treeLifecycle != null)
+            GameObject hitTree = hit.collider.gameObject;
+            TreeLifecycle hitTreeLifecycle = hitTree.GetComponent<TreeLifecycle>();
+
+            if (hitTreeLifecycle != null)
             {
-                treeLifecycle.treeSelected();
-                // Update line endpoint to hit position for visual feedback
+                // Only change selection if the pointed tree changes
+                if (pointedTree != hitTree)
+                {
+                    // Unselect old tree
+                    if (pointedTree != null)
+                    {
+                        TreeLifecycle oldTreeLifecycle = pointedTree.GetComponent<TreeLifecycle>();
+                        if (oldTreeLifecycle != null)
+                        {
+                            oldTreeLifecycle.treeUnselected();
+                            oldTreeLifecycle.birdChoseThisTree = false;
+                        }
+                    }
+
+                    // Select new tree
+                    hitTreeLifecycle.treeSelected();
+                    hitTreeLifecycle.birdChoseThisTree = true;
+
+                    pointedTree = hitTree;
+                    birdPath.SetTargetTree(pointedTree);
+                }
+
+                // Update line endpoint to hit position
                 if (pointerLine != null)
                 {
                     pointerLine.SetPosition(1, hit.point);
                 }
-                
-                // If we hit a tree, tell the bird to fly to it
-                if (!isPointing || pointedTree != hit.collider.gameObject)
-                {
-                    isPointing = true;
-                    pointedTree = hit.collider.gameObject;
-                    birdPath.SetTargetTree(pointedTree);
-                }
-            }else{
-                treeLifecycle.treeUnselected();
+
+                isPointing = true;
             }
         }
-    }
+        else
+        {
+            // No hit: unselect previously pointed tree if any
+            if (pointedTree != null)
+            {
+                TreeLifecycle oldTreeLifecycle = pointedTree.GetComponent<TreeLifecycle>();
+                if (oldTreeLifecycle != null)
+                {
+                    oldTreeLifecycle.treeUnselected();
+                    oldTreeLifecycle.birdChoseThisTree = false;
+                }
 
-    void selectTree(){
+                pointedTree = null;
+            }
 
-    }
+            isPointing = false;
 
-    void OnHover(){
-
+            if (pointerLine != null)
+            {
+                pointerLine.enabled = false;
+            }
+        }
     }
 }
